@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import shuffle from "./util/shuffle";
+import useAppBadge from "./hooks/useAppBadge";
 
 function App() {
   const [cards, setCards] = useState(shuffle); // Shuffle cards
@@ -9,6 +10,7 @@ function App() {
   const [secondPick, setSecondPick] = useState(null); // Second card picked
   const [disabled, setDisabled] = useState(false); // Disable clicks
   const [wins, setWins] = useState(0); // Win streak
+  const [setBadge, clearBadge] = useAppBadge();
 
   // Handle card clicks
   const handleClick = (card) => {
@@ -25,6 +27,7 @@ function App() {
 
   // Reset game
   const handleNewGame = () => {
+    clearBadge();
     setWins(0);
     handleClick();
     setCards(shuffle);
@@ -74,6 +77,7 @@ function App() {
     if (cards.length && checkWin.length < 1) {
       setWins(wins + 1);
       handleClick();
+      setBadge();
       setCards(shuffle);
     }
   }, [cards, wins]);

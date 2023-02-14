@@ -10,7 +10,6 @@ const Header = ({ handleNewGame, wins }) => {
       <h4>{wins} wins</h4>
       <h3>Memory Game</h3>
       <button onClick={handleNewGame}>New Game</button>
-      <p>Wins: {wins}</p>
     </header>
   );
 };
